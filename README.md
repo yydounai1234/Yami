@@ -2,7 +2,7 @@
 
 使用 **SoundTouch** 提供的变声核心逻辑，通过 **audioContenxt** 将音频资源、音频文件或音频流进行实时变声处理。
 
-本库 wsola 算法以及插值算法借鉴了 [SoundTouchJS](https://github.com/cutterbl/SoundTouchJS) 中的实现，与 SoundTouchJS](https://github.com/cutterbl/SoundTouchJS) 相比本库的优点在于：
+本库 wsola 算法以及插值算法借鉴了 [SoundTouchJS](https://github.com/cutterbl/SoundTouchJS) 中的实现，与 [SoundTouchJS](https://github.com/cutterbl/SoundTouchJS) 相比本库的优点在于：
 
 - 1.支持 Typescript
 - 2.支持原生 ESM
@@ -86,7 +86,7 @@ track.play()
 
 ## 使用文档
 
-具体的使用文档指南可以查看 [Yaml](https://yydounai1234.github.io/yami/)。
+具体的使用文档指南可以查看 [Yaml](https://yydounai1234.github.io/Yami/)。
 
 ## LICENSE
 
