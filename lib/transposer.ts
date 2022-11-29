@@ -1,6 +1,5 @@
 /**
  * RateTransposer 类
- * @remarks 通过插值算法调整采样率，进行变速变调
  */
 export default class RateTransposer {
   private _rate = 1
@@ -39,7 +38,7 @@ export default class RateTransposer {
   /**
    * 处理数据
    * @remarks 变速变调
-   * @param pcm pcm 音频数据
+   * @param pcm - pcm 音频数据
    * @returns 变速变调后的数据
    */
   process(pcm: Float32Array) {

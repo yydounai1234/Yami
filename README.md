@@ -2,12 +2,24 @@
 
 使用 **SoundTouch** 提供的变声核心逻辑，通过 **audioContenxt** 将音频资源、音频文件或音频流进行实时变声处理。
 
-> 由于使用 **ScriptProcessorNode** 的音频数据输入进行实时变声处理，所以不支持变速功能，如果需要使用到变速功能并且不使用音频流，可以使用 [SoundTouchJS](https://github.com/cutterbl/SoundTouchJS)。变速变调算法以及变速不变调算法 C 实现参考 [soundtouch](https://github.com/rspeyer/soundtouch)。
+本库 wsola 算法以及插值算法借鉴了 [SoundTouchJS](https://github.com/cutterbl/SoundTouchJS) 中的实现，与 SoundTouchJS](https://github.com/cutterbl/SoundTouchJS) 相比本库的优点在于：
+
+- 1.支持 Typescript
+- 2.支持原生 ESM
+- 3.支持麦克风设备实时变声
+- 4.代码量较小
+
+缺点在于：
+
+- 1.不支持变速
+- 2.可能不够稳定
+
+> 由于使用 **ScriptProcessorNode** 的音频数据输入进行实时变声处理，所以不支持变速功能，如果需要使用到变速功能并且不使用音频流，可以使用 [SoundTouchJS](https://github.com/cutterbl/SoundTouchJS)。
 
 
 ## 安装
 
-### NPM
+### NPM（暂不支持）
 
 ```text
 yarn add Yami
@@ -16,13 +28,26 @@ yarn add Yami
 ### CDN
 
 ```html
-<script src="./Yaml.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/yydounai1234/yami@0.0.1/Yaml.umd.js"></script>
+<script>
+    // ...
+</script> 
 ```
 
 ### ESM
 
 ```html
-<script src="./Yaml.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/gh/yydounai1234/yami@0.0.1/Yaml.js"></script>
+<script type="importmap">
+  {
+    "imports": {
+      "yaml": "https://xxx/Yaml.js"
+    }
+  }
+</script>
+<script type="module">
+    // ...
+</script> 
 ```
 
 ## 使用方法
@@ -61,4 +86,8 @@ track.play()
 
 ## 使用文档
 
-具体的使用文档指南可以查看 [Yaml](https://yydounai1234.com)。
+具体的使用文档指南可以查看 [Yaml](https://yydounai1234.github.io/yami/)。
+
+## LICENSE
+
+由于部分代码借鉴了 [SoundTouchJS](https://github.com/cutterbl/SoundTouchJS)，其采用了 LGPL，故本库也采用 LGPL 协议。

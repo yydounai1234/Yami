@@ -1,6 +1,8 @@
 import Track, { TrackType } from './track'
 /**
+ * Yaml 类
  * @public
+ * @remarks 主要用于创建各种音频轨
  */
 export default class Yami {
   private audioContext = new AudioContext()
@@ -40,6 +42,7 @@ export default class Yami {
   /**
    * 根据麦克风创建音频轨
    * @param config - 音频配置项 @see [MediaTrackConstraints - Wikipedia](https://developer.mozilla.org/en-US/docs/Web/API/MediaTrackConstraints)
+   * @returns 音频轨
    */
   async createMicrophoneTrack(config: MediaTrackConstraints | boolean = true): Promise<Track> {
     return new Promise(async (resolve) => {

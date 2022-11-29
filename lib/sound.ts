@@ -1,7 +1,6 @@
 /**
  * SoundTouch 类
- * @remarks 与原生 SoundTouch 类似，将输入数据通过 Strech 与 Transposer 类实现变速不变调，变速变调，变调不变速
- * 其中 Transposer 只采用插值算法，Strech 采用 wsola 算法
+ * @remarks 与原生 SoundTouch 类似，将输入数据通过 Strech 与 Transposer 类实现
  */
 
 import RateTransposer from './transposer'
@@ -59,6 +58,10 @@ export default class SoundTouch {
     this.pitchOctaves = pitchSemitones / 12.0
   }
 
+  /**
+   * 计算 rate 与 tempo
+   * @remarks rate 为调整采样率，tempo 为 overlap 
+   */
   calculateEffectiveRateAndTempo() {
     const previousTempo = this._tempo
     const previousRate = this._rate
@@ -75,8 +78,8 @@ export default class SoundTouch {
   }
 
   /**
-   *
-   * @param pcm 音频原始数据
+   * 处理数据
+   * @param pcm - 音频原始数据
    * @returns 处理后的数据
    */
   process(pcm: Float32Array): Float32Array {

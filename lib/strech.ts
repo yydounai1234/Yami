@@ -1,41 +1,9 @@
 /**
  * Stretch 类
- * @remarks 通过 wsola 拆分 overlap 实现变速不变调
  */
 import { checkLimits } from './utils'
 import SampleBuffer from './sampleBuffer'
-const USE_AUTO_SEQUENCE_LEN = 0
-const DEFAULT_SEQUENCE_MS = USE_AUTO_SEQUENCE_LEN
-const USE_AUTO_SEEKWINDOW_LEN = 0
-const DEFAULT_SEEKWINDOW_MS = USE_AUTO_SEEKWINDOW_LEN
-const DEFAULT_OVERLAP_MS = 8
-const _SCAN_OFFSETS = [
-  [
-    124, 186, 248, 310, 372, 434, 496, 558, 620, 682, 744, 806, 868, 930, 992,
-    1054, 1116, 1178, 1240, 1302, 1364, 1426, 1488, 0,
-  ],
-  [
-    -100, -75, -50, -25, 25, 50, 75, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    -20, -15, -10, -5, 5, 10, 15, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0,
-  ],
-  [-4, -3, -2, -1, 1, 2, 3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-]
-const AUTOSEQ_TEMPO_LOW = 0.5
-const AUTOSEQ_TEMPO_TOP = 2.0
-const AUTOSEQ_AT_MIN = 125.0
-const AUTOSEQ_AT_MAX = 50.0
-const AUTOSEQ_K =
-  (AUTOSEQ_AT_MAX - AUTOSEQ_AT_MIN) / (AUTOSEQ_TEMPO_TOP - AUTOSEQ_TEMPO_LOW)
-const AUTOSEQ_C = AUTOSEQ_AT_MIN - AUTOSEQ_K * AUTOSEQ_TEMPO_LOW
-const AUTOSEEK_AT_MIN = 25.0
-const AUTOSEEK_AT_MAX = 15.0
-const AUTOSEEK_K =
-  (AUTOSEEK_AT_MAX - AUTOSEEK_AT_MIN) / (AUTOSEQ_TEMPO_TOP - AUTOSEQ_TEMPO_LOW)
-const AUTOSEEK_C = AUTOSEEK_AT_MIN - AUTOSEEK_K * AUTOSEQ_TEMPO_LOW
+import * as CONSTANT from './constant'
 
 export default class Stretch {
   /**
@@ -70,17 +38,17 @@ export default class Stretch {
   /**
    * 相邻帧时长
    */
-  private overlapMs = DEFAULT_OVERLAP_MS
+  private overlapMs = CONSTANT.DEFAULT_OVERLAP_MS
 
   /**
    * 一帧的时长
    */
-  private sequenceMs = DEFAULT_SEQUENCE_MS
+  private sequenceMs = CONSTANT.DEFAULT_SEQUENCE_MS
 
   /**
    * 检索最佳帧的范围
    */
-  private seekWindowMs = DEFAULT_SEEKWINDOW_MS
+  private seekWindowMs = CONSTANT.DEFAULT_SEEKWINDOW_MS
 
   /**
    * 一帧的大小
@@ -117,17 +85,17 @@ export default class Stretch {
   constructor() {
     this.setParameters(
       44100,
-      DEFAULT_SEQUENCE_MS,
-      DEFAULT_SEEKWINDOW_MS,
-      DEFAULT_OVERLAP_MS
+      CONSTANT.DEFAULT_SEQUENCE_MS,
+      CONSTANT.DEFAULT_SEEKWINDOW_MS,
+      CONSTANT.DEFAULT_OVERLAP_MS
     )
   }
   /**
    * 设置 wsola 算法参数
-   * @param sampleRate 采样率
-   * @param sequenceMs 一帧的时长
-   * @param seekWindowMs 检索最佳帧的范围
-   * @param overlapMs 相邻两帧重叠时长
+   * @param sampleRate - 采样率
+   * @param sequenceMs - 一帧的时长
+   * @param seekWindowMs - 检索最佳帧的范围
+   * @param overlapMs - 相邻两帧重叠时长
    */
   setParameters(
     sampleRate: number,
@@ -165,13 +133,17 @@ export default class Stretch {
    */
   calculateSequenceParameters() {
     if (this.autoSeqSetting) {
-      let seq = AUTOSEQ_C + AUTOSEQ_K * this._tempo
-      seq = checkLimits(seq, AUTOSEQ_AT_MAX, AUTOSEQ_AT_MIN)
+      let seq = CONSTANT.AUTOSEQ_C + CONSTANT.AUTOSEQ_K * this._tempo
+      seq = checkLimits(seq, CONSTANT.AUTOSEQ_AT_MAX, CONSTANT.AUTOSEQ_AT_MIN)
       this.sequenceMs = Math.floor(seq + 0.5)
     }
     if (this.autoSeekSetting) {
-      let seek = AUTOSEEK_C + AUTOSEEK_K * this._tempo
-      seek = checkLimits(seek, AUTOSEEK_AT_MAX, AUTOSEEK_AT_MIN)
+      let seek = CONSTANT.AUTOSEEK_C + CONSTANT.AUTOSEEK_K * this._tempo
+      seek = checkLimits(
+        seek,
+        CONSTANT.AUTOSEEK_AT_MAX,
+        CONSTANT.AUTOSEEK_AT_MIN
+      )
       this.seekWindowMs = Math.floor(seek + 0.5)
     }
     this.seekWindowLength = Math.floor(
@@ -223,16 +195,15 @@ export default class Stretch {
    * @remarks 最佳匹配帧的位置
    */
   seekBestOverlapPosition() {
-    let scanCount = 0
     this.preCalculateCorrelationReferenceStereo()
     let bestCorrelation = Number.MIN_VALUE
     let bestOffset = 0
     let correlationOffset = 0
     let tempOffset = 0
-    for (; scanCount < 4; scanCount = scanCount + 1) {
+    for (let scanCount = 0; scanCount < 4; scanCount = scanCount + 1) {
       let j = 0
-      while (_SCAN_OFFSETS[scanCount][j]) {
-        tempOffset = correlationOffset + _SCAN_OFFSETS[scanCount][j]
+      while (CONSTANT.SCAN_OFFSETS[scanCount][j]) {
+        tempOffset = correlationOffset + CONSTANT.SCAN_OFFSETS[scanCount][j]
         if (tempOffset >= this.seekLength) {
           break
         }
@@ -266,9 +237,9 @@ export default class Stretch {
 
   /**
    * 计算相关性
-   * @param mixingPosition 对比位置
-   * @param compare 对比帧
-   * @returns 想关性值
+   * @param mixingPosition - 对比位置
+   * @param compare - 对比帧
+   * @returns 相关性值
    */
   calculateCrossCorrelationStereo(
     mixingPosition: number,
@@ -289,7 +260,7 @@ export default class Stretch {
 
   /**
    * 合帧
-   * @param overlapPosition 合帧位置
+   * @param overlapPosition - 合帧位置
    */
   overlap(overlapPosition: number) {
     let inputPosition = 2 * overlapPosition
@@ -316,7 +287,7 @@ export default class Stretch {
 
   /**
    * 变速不变调
-   * @param pcm pcm 变速变调处理后的音频数据
+   * @param pcm - pcm 变速变调处理后的音频数据
    * @returns 处理后的数据
    */
   process(pcm: Float32Array): Float32Array {
@@ -324,7 +295,7 @@ export default class Stretch {
     this.inputBuffer.putSamples(pcm, 0, -1)
     while (this.inputBuffer.frameCount >= this.sampleReq) {
       /** overlap 部分 */
-      let offset = this.seekBestOverlapPosition()
+      const offset = this.seekBestOverlapPosition()
       this.outputBuffer.ensureAdditionalCapacity(this.overlapLength)
       this.overlap(Math.floor(offset))
       this.outputBuffer.put(this.overlapLength)
@@ -346,7 +317,7 @@ export default class Stretch {
       )
       /** 计算输入跳过的部分位置 */
       this.skipFract += this.nominalSkip
-      let overlapSkip = Math.floor(this.skipFract)
+      const overlapSkip = ~~this.skipFract
       this.skipFract -= overlapSkip
       this.inputBuffer.receive(overlapSkip)
     }

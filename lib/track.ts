@@ -4,16 +4,26 @@
  */
 import SoundTouch from './sound'
 import SampleBuffer from './sampleBuffer'
+import * as CONSTANT from './constant'
 /**
  * 音频轨类型
  * @public
  */
 export enum TrackType {
+  /**
+   * 输入为 url 链接
+   */
   URL = 'URL',
+  /**
+   * 输入为音频文件
+   */
   BUFFER = 'BUFFER',
+  /**
+   * 输入为音频流
+   */
   MICROPHONE = 'MICROPHONE',
 }
-const BUFFER_SIZE = 16384
+const BUFFER_SIZE = CONSTANT.BUFFER_SIZE
 
 const isAudioBufferSourceNode = (
   type: AudioBufferSourceNode | MediaStreamAudioSourceNode
@@ -27,7 +37,9 @@ const isAudioBuffer = (
   return type instanceof AudioBuffer
 }
 /**
+ * 音频类
  * @public
+ * @remarks 主要用于播放音频以及获取音频内容
  */
 export default class Track {
   private bufferSize = BUFFER_SIZE
@@ -122,7 +134,7 @@ export default class Track {
       }
       return this.soundTouch.process(source)
     } else {
-      throw '麦克风流不允许获取数据'
+      return new Float32Array()
     }
   }
 }
