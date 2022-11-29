@@ -28,7 +28,7 @@ yarn add Yami
 ### CDN
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/yydounai1234/Yami/dist/Yaml.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/yydounai1234/Yami/dist/Yami.umd.js"></script>
 <script>
     // ...
 </script> 
@@ -37,11 +37,10 @@ yarn add Yami
 ### ESM
 
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/gh/yydounai1234/Yami/dist/Yaml.js"></script>
 <script type="importmap">
   {
     "imports": {
-      "yaml": "https://xxx/Yaml.js"
+      "Yami": "https://cdn.jsdelivr.net/gh/yydounai1234/Yami/dist/Yami.js"
     }
   }
 </script>
@@ -86,7 +85,7 @@ track.play()
 
 ## 使用文档
 
-具体的使用文档指南可以查看 [Yaml](https://yydounai1234.github.io/Yami/)。
+具体的使用文档指南可以查看 [Yami](https://yydounai1234.github.io/Yami/)。
 
 ## LICENSE
 
