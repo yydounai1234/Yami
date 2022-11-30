@@ -47,6 +47,7 @@ export default class Track {
   private scriptNode: ScriptProcessorNode
   private soundTouch = new SoundTouch()
   private processBuffer = new SampleBuffer()
+  private gainNode: GainNode
   constructor(
     private source: AudioBuffer | MediaStream,
     private audioContext: AudioContext,
@@ -64,11 +65,9 @@ export default class Track {
       2
     )
     this.sourceNode.connect(this.scriptNode)
-    this.scriptNode.connect(this.audioContext.destination)
-  }
-
-  set pitch(newVal: number) {
-    this.soundTouch.pitch = newVal
+    this.gainNode = this.audioContext.createGain()
+    this.scriptNode.connect(this.gainNode)
+    this.gainNode.connect(this.audioContext.destination)
   }
 
   /**
@@ -76,6 +75,21 @@ export default class Track {
    */
   get pitch() {
     return this.soundTouch.pitch
+  }
+
+  set pitch(newVal: number) {
+    this.soundTouch.pitch = newVal
+  }
+
+  /**
+   * 获取音量
+   */
+  get volume() {
+    return this.gainNode.gain.value
+  }
+
+  set volume(newVal: number) {
+    this.gainNode.gain.value = newVal
   }
 
   /**
