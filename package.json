@@ -1,6 +1,6 @@
 {
-  "name": "yami",
-  "private": true,
+  "name": "yami-voice",
+  "private": false,
   "version": "0.0.1",
   "type": "module",
   "files": [
@@ -26,5 +26,14 @@
     "typedoc": "^0.23.21",
     "typescript": "^4.8.4",
     "vite": "^3.2.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yydounai1234/Yami.git"
+  },
+  "author": "794095300@qq.com",
+  "homepage": "https://github.com/yydounai1234/Yami#readme",
+  "bugs": {
+    "url": "https://github.com/yydounai1234/Yami/issues"
   }
 }

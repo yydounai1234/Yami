@@ -19,10 +19,10 @@
 
 ## 安装
 
-### NPM（暂不支持）
+### NPM
 
 ```text
-yarn add Yami
+yarn add yami-voice
 ```
 
 ### CDN
