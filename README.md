@@ -28,7 +28,7 @@ yarn add Yami
 ### CDN
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/yydounai1234/Yami/dist/Yami.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/yydounai1234/Yami/dist/Yami.umd.cjs"></script>
 <script>
     // ...
 </script> 
@@ -40,7 +40,7 @@ yarn add Yami
 <script type="importmap">
   {
     "imports": {
-      "Yami": "https://cdn.jsdelivr.net/gh/yydounai1234/Yami/dist/Yami.js"
+      "Yami": "https://cdn.jsdelivr.net/gh/yydounai1234/Yami/dist/Yami.cjs"
     }
   }
 </script>
