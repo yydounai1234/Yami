@@ -1,7 +1,7 @@
-var U = Object.defineProperty;
-var x = (a, t, e) => t in a ? U(a, t, { enumerable: !0, configurable: !0, writable: !0, value: e }) : a[t] = e;
-var r = (a, t, e) => (x(a, typeof t != "symbol" ? t + "" : t, e), e);
-class N {
+var x = Object.defineProperty;
+var D = (a, t, e) => t in a ? x(a, t, { enumerable: !0, configurable: !0, writable: !0, value: e }) : a[t] = e;
+var r = (a, t, e) => (D(a, typeof t != "symbol" ? t + "" : t, e), e);
+class U {
   constructor() {
     r(this, "_rate", 1);
     r(this, "slopeCount", 0);
@@ -20,24 +20,24 @@ class N {
   }
   process(t) {
     const e = t.length / 2, s = t, i = new Float32Array(~~(t.length / this.rate));
-    let o = 0, n = 0;
+    let n = 0, o = 0;
     for (; this.slopeCount < 1; )
-      i[2 * n] = (1 - this.slopeCount) * this.prevSampleL + this.slopeCount * s[0], i[2 * n + 1] = (1 - this.slopeCount) * this.prevSampleR + this.slopeCount * s[1], n = n + 1, this.slopeCount += this.rate;
+      i[2 * o] = (1 - this.slopeCount) * this.prevSampleL + this.slopeCount * s[0], i[2 * o + 1] = (1 - this.slopeCount) * this.prevSampleR + this.slopeCount * s[1], o = o + 1, this.slopeCount += this.rate;
     if (this.slopeCount -= 1, e !== 1) {
       t:
         for (; ; ) {
           for (; this.slopeCount > 1; )
-            if (this.slopeCount -= 1, o = o + 1, o >= e - 1)
+            if (this.slopeCount -= 1, n = n + 1, n >= e - 1)
               break t;
-          const h = 2 * o;
-          i[2 * n] = (1 - this.slopeCount) * s[h] + this.slopeCount * s[h + 2], i[2 * n + 1] = (1 - this.slopeCount) * s[h + 1] + this.slopeCount * s[h + 3], n = n + 1, this.slopeCount += this.rate;
+          const h = 2 * n;
+          i[2 * o] = (1 - this.slopeCount) * s[h] + this.slopeCount * s[h + 2], i[2 * o + 1] = (1 - this.slopeCount) * s[h + 1] + this.slopeCount * s[h + 3], o = o + 1, this.slopeCount += this.rate;
         }
     }
     return this.prevSampleL = s[2 * e - 2], this.prevSampleR = s[2 * e - 1], i;
   }
 }
-const g = (a, t) => (a > t ? a - t : t - a) > 1e-10, B = (a, t, e) => a < t ? t : a > e ? e : a;
-class l {
+const B = (a, t) => (a > t ? a - t : t - a) > 1e-10, N = (a, t, e) => a < t ? t : a > e ? e : a;
+class c {
   constructor() {
     r(this, "_vector", new Float32Array());
     r(this, "_position", 0);
@@ -68,12 +68,12 @@ class l {
     e = e || 0;
     const i = e * 2;
     s >= 0 || (s = (t.length - i) / 2);
-    const o = s * 2;
+    const n = s * 2;
     this.ensureCapacity(s + this._frameCount);
-    const n = this.endIndex;
+    const o = this.endIndex;
     this.vector.set(
-      t.subarray(i, i + o),
-      n
+      t.subarray(i, i + n),
+      o
     ), this._frameCount += s;
   }
   putBuffer(t, e, s = 0) {
@@ -101,7 +101,7 @@ class l {
     this._position > 0 && (this._vector.set(this._vector.subarray(this.startIndex, this.endIndex)), this._position = 0);
   }
 }
-const I = 0, E = I, P = 0, A = P, L = 8, d = 0.5, T = 2, m = 125, k = 50, M = (k - m) / (T - d), F = m - M * d, v = 25, R = 15, y = (R - v) / (T - d), b = v - y * d, w = [
+const P = 0, E = P, I = 0, A = I, L = 8, m = 0.5, O = 2, S = 125, k = 50, R = (k - S) / (O - m), F = S - R * m, C = 25, M = 15, y = (M - C) / (O - m), b = C - y * m, w = [
   [
     124,
     186,
@@ -181,8 +181,8 @@ const I = 0, E = I, P = 0, A = P, L = 8, d = 0.5, T = 2, m = 125, k = 50, M = (k
     0
   ],
   [-4, -3, -2, -1, 1, 2, 3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-], D = 16384;
-class q {
+], q = 16384;
+class W {
   constructor() {
     r(this, "_tempo", 1);
     r(this, "autoSeqSetting", !0);
@@ -199,8 +199,8 @@ class q {
     r(this, "sampleReq", 0);
     r(this, "nominalSkip", 0);
     r(this, "skipFract", 0);
-    r(this, "inputBuffer", new l());
-    r(this, "outputBuffer", new l());
+    r(this, "inputBuffer", new c());
+    r(this, "outputBuffer", new c());
     this.setParameters(
       44100,
       E,
@@ -213,15 +213,15 @@ class q {
   }
   calculateSequenceParameters() {
     if (this.autoSeqSetting) {
-      let t = F + M * this._tempo;
-      t = B(t, k, m), this.sequenceMs = Math.floor(t + 0.5);
+      let t = F + R * this._tempo;
+      t = N(t, k, S), this.sequenceMs = Math.floor(t + 0.5);
     }
     if (this.autoSeekSetting) {
       let t = b + y * this._tempo;
-      t = B(
+      t = N(
         t,
-        R,
-        v
+        M,
+        C
       ), this.seekWindowMs = Math.floor(t + 0.5);
     }
     this.seekWindowLength = Math.floor(
@@ -243,14 +243,14 @@ class q {
   seekBestOverlapPosition() {
     this.preCalculateCorrelationReferenceStereo();
     let t = Number.MIN_VALUE, e = 0, s = 0, i = 0;
-    for (let o = 0; o < 4; o = o + 1) {
-      let n = 0;
-      for (; w[o][n] && (i = s + w[o][n], !(i >= this.seekLength)); ) {
+    for (let n = 0; n < 4; n = n + 1) {
+      let o = 0;
+      for (; w[n][o] && (i = s + w[n][o], !(i >= this.seekLength)); ) {
         let h = this.calculateCrossCorrelationStereo(
           2 * i,
           this.refMidBuffer
         );
-        h > t && (t = h, e = i), n = n + 1;
+        h > t && (t = h, e = i), o = o + 1;
       }
       s = e;
     }
@@ -266,10 +266,10 @@ class q {
     const s = this.inputBuffer.vector;
     t += this.inputBuffer.startIndex;
     let i = 0;
-    const o = 2 * this.overlapLength;
-    for (let n = 2; n < o; n = n + 2) {
-      let h = n + t;
-      i += s[h] * e[n] + s[h + 1] * e[n + 1];
+    const n = 2 * this.overlapLength;
+    for (let o = 2; o < n; o = o + 2) {
+      let h = o + t;
+      i += s[h] * e[o] + s[h + 1] * e[o + 1];
     }
     return i;
   }
@@ -277,14 +277,14 @@ class q {
     let e = 2 * t;
     const s = this.inputBuffer.vector;
     e += this.inputBuffer.startIndex;
-    const i = this.outputBuffer.vector, o = this.outputBuffer.endIndex, n = 1 / this.overlapLength;
+    const i = this.outputBuffer.vector, n = this.outputBuffer.endIndex, o = 1 / this.overlapLength;
     for (let h = 0; h < this.overlapLength; h = h + 1) {
-      let c = (this.overlapLength - h) * n, u = h * n, f = 2 * h, _ = f + e, C = f + o;
-      i[C + 0] = s[_ + 0] * u + this.midBuffer[f + 0] * c, i[C + 1] = s[_ + 1] * u + this.midBuffer[f + 1] * c;
+      let l = (this.overlapLength - h) * o, f = h * o, u = 2 * h, _ = u + e, T = u + n;
+      i[T + 0] = s[_ + 0] * f + this.midBuffer[u + 0] * l, i[T + 1] = s[_ + 1] * f + this.midBuffer[u + 1] * l;
     }
   }
   process(t) {
-    for (this.outputBuffer = new l(), this.inputBuffer.putSamples(t, 0, -1); this.inputBuffer.frameCount >= this.sampleReq; ) {
+    for (this.outputBuffer = new c(), this.inputBuffer.putSamples(t, 0, -1); this.inputBuffer.frameCount >= this.sampleReq; ) {
       const e = this.seekBestOverlapPosition();
       this.outputBuffer.ensureAdditionalCapacity(this.overlapLength), this.overlap(Math.floor(e)), this.outputBuffer.put(this.overlapLength);
       let s = this.seekWindowLength - 2 * this.overlapLength;
@@ -297,21 +297,21 @@ class q {
       this.midBuffer.set(
         this.inputBuffer.vector.subarray(i, i + 2 * this.overlapLength)
       ), this.skipFract += this.nominalSkip;
-      const o = ~~this.skipFract;
-      this.skipFract -= o, this.inputBuffer.receive(o);
+      const n = ~~this.skipFract;
+      this.skipFract -= n, this.inputBuffer.receive(n);
     }
     return this.outputBuffer.vector;
   }
 }
-class W {
+class K {
   constructor() {
     r(this, "_rate", 0);
     r(this, "_tempo", 0);
     r(this, "virtualPitch", 1);
     r(this, "virtualRate", 1);
     r(this, "virtualTempo", 1);
-    r(this, "transposer", new N());
-    r(this, "stretch", new q());
+    r(this, "transposer", new U());
+    r(this, "stretch", new W());
     this.calculateEffectiveRateAndTempo();
   }
   get rate() {
@@ -343,7 +343,7 @@ class W {
   }
   calculateEffectiveRateAndTempo() {
     const t = this._tempo, e = this._rate;
-    this._tempo = this.virtualTempo / this.virtualPitch, this._rate = this.virtualRate * this.virtualPitch, g(this._tempo, t) && (this.stretch.tempo = this._tempo), g(this._rate, e) && (this.transposer.rate = this._rate);
+    this._tempo = this.virtualTempo / this.virtualPitch, this._rate = this.virtualRate * this.virtualPitch, B(this._tempo, t) && (this.stretch.tempo = this._tempo), B(this._rate, e) && (this.transposer.rate = this._rate);
   }
   process(t) {
     if (this.rate > 1) {
@@ -355,44 +355,78 @@ class W {
     }
   }
 }
-var p = /* @__PURE__ */ ((a) => (a.URL = "URL", a.BUFFER = "BUFFER", a.MICROPHONE = "MICROPHONE", a))(p || {});
-const K = D, Q = (a) => a instanceof AudioBufferSourceNode, O = (a) => a instanceof AudioBuffer;
-class S {
+var d = /* @__PURE__ */ ((a) => (a.URL = "URL", a.BUFFER = "BUFFER", a.MICROPHONE = "MICROPHONE", a))(d || {});
+const Q = q, p = (a) => a instanceof AudioBufferSourceNode, g = (a) => a instanceof AudioBuffer;
+class v {
   constructor(t, e, s) {
-    r(this, "bufferSize", K);
+    r(this, "sourceDuration", {
+      startTime: 0,
+      pauseTime: 0,
+      lastPauseTime: 0,
+      offsetTime: 0
+    });
+    r(this, "bufferSize", Q);
     r(this, "sourceNode");
     r(this, "scriptNode");
-    r(this, "soundTouch", new W());
-    r(this, "processBuffer", new l());
-    this.source = t, this.audioContext = e, this.type = s, O(this.source) ? (this.sourceNode = this.audioContext.createBufferSource(), this.sourceNode.buffer = this.source) : this.sourceNode = this.audioContext.createMediaStreamSource(this.source), this.scriptNode = this.audioContext.createScriptProcessor(
+    r(this, "soundTouch", new K());
+    r(this, "processBuffer", new c());
+    r(this, "gainNode");
+    this.source = t, this.audioContext = e, this.type = s, this.init();
+  }
+  init() {
+    g(this.source) ? (this.sourceNode = this.audioContext.createBufferSource(), this.sourceNode.buffer = this.source, this.sourceNode.addEventListener("ended", () => {
+      this.release();
+    })) : this.sourceNode = this.audioContext.createMediaStreamSource(this.source), this.scriptNode = this.audioContext.createScriptProcessor(
       this.bufferSize,
       2,
       2
-    ), this.sourceNode.connect(this.scriptNode), this.scriptNode.connect(this.audioContext.destination);
-  }
-  set pitch(t) {
-    this.soundTouch.pitch = t;
+    ), this.sourceNode.connect(this.scriptNode), this.gainNode = this.audioContext.createGain(), this.scriptNode.connect(this.gainNode), this.gainNode.connect(this.audioContext.destination);
   }
   get pitch() {
     return this.soundTouch.pitch;
   }
-  async play() {
-    let t = !1;
-    this.scriptNode.onaudioprocess = async (e) => {
-      const s = e.outputBuffer, i = e.inputBuffer, o = new Float32Array(this.bufferSize * 2), n = i.getChannelData(0), h = i.numberOfChannels > 1 ? i.getChannelData(1) : i.getChannelData(0);
+  set pitch(t) {
+    this.soundTouch.pitch = t;
+  }
+  get volume() {
+    return this.gainNode ? this.gainNode.gain.value : -1;
+  }
+  set volume(t) {
+    this.gainNode && (this.gainNode.gain.value = t);
+  }
+  get duration() {
+    return g(this.source) ? this.source.duration : -1;
+  }
+  get currentTime() {
+    let t = this.audioContext.currentTime;
+    return this.sourceDuration.lastPauseTime && (t = this.sourceDuration.lastPauseTime), this.sourceDuration.offsetTime + t - this.sourceDuration.startTime - this.sourceDuration.pauseTime;
+  }
+  async play(t = 0) {
+    let e = !1;
+    this.scriptNode && (this.scriptNode.onaudioprocess = async (s) => {
+      const i = s.outputBuffer, n = s.inputBuffer, o = new Float32Array(this.bufferSize * 2), h = n.getChannelData(0), l = n.numberOfChannels > 1 ? n.getChannelData(1) : n.getChannelData(0);
       for (let u = 0; u < o.length; u++)
-        o[u * 2] = n[u], o[u * 2 + 1] = h[u];
-      const c = this.soundTouch.process(o);
-      if (this.processBuffer.putSamples(c, 0, -1), t) {
+        o[u * 2] = h[u], o[u * 2 + 1] = l[u];
+      const f = this.soundTouch.process(o);
+      if (this.processBuffer.putSamples(f, 0, -1), e) {
         this.processBuffer.receiveSamples(o, this.bufferSize);
         for (let u = 0; u < o.length; u++)
-          s.getChannelData(0)[u] = o[u * 2], s.getChannelData(1)[u] = o[u * 2 + 1];
+          i.getChannelData(0)[u] = o[u * 2], i.getChannelData(1)[u] = o[u * 2 + 1];
       } else
-        this.processBuffer.frameCount >= this.bufferSize * 2 && (t = !0);
-    }, Q(this.sourceNode) && this.sourceNode.start();
+        this.processBuffer.frameCount >= this.bufferSize * 2 && (e = !0);
+    }), this.sourceNode && p(this.sourceNode) && (this.sourceDuration.startTime = this.audioContext.currentTime, this.sourceDuration.offsetTime = t, this.sourceNode.start(0, t));
+  }
+  resume() {
+    this.sourceNode && p(this.sourceNode) && (this.sourceNode.playbackRate.value = 1, this.sourceDuration.pauseTime += this.audioContext.currentTime - this.sourceDuration.lastPauseTime, this.sourceDuration.lastPauseTime = 0);
+  }
+  pause() {
+    this.sourceNode && p(this.sourceNode) && (this.sourceNode.playbackRate.value = Number.MIN_VALUE, this.sourceDuration.lastPauseTime || (this.sourceDuration.lastPauseTime = this.audioContext.currentTime));
+  }
+  seek(t) {
+    this.release(), this.init(), this.play(t);
   }
   process() {
-    if (O(this.source)) {
+    if (g(this.source)) {
       const t = new Float32Array(this.source.length * 2), e = this.source.getChannelData(0), s = this.source.numberOfChannels > 1 ? this.source.getChannelData(1) : this.source.getChannelData(0);
       for (let i = 0; i < t.length; i++)
         t[i * 2] = e[i], t[i * 2 + 1] = s[i];
@@ -400,43 +434,54 @@ class S {
     } else
       return new Float32Array();
   }
-}
-class H {
-  constructor() {
-    r(this, "audioContext", new AudioContext());
+  release() {
+    this.sourceNode && (this.gainNode && this.gainNode.disconnect(), this.sourceNode.disconnect(), this.scriptNode && this.scriptNode.disconnect(), p(this.sourceNode) ? (this.resetSourceDuration(), this.sourceNode.onended = null) : this.sourceNode.mediaStream.getTracks().forEach((t) => {
+      t.stop();
+    }));
   }
+  resetSourceDuration() {
+    this.processBuffer = new c(), this.sourceDuration = {
+      offsetTime: 0,
+      startTime: 0,
+      lastPauseTime: 0,
+      pauseTime: 0
+    };
+  }
+}
+class V {
   async createURLTrack(t) {
     return new Promise(async (e) => {
-      const i = await (await fetch(t)).arrayBuffer();
-      this.audioContext.decodeAudioData(i, async (o) => {
-        const n = new S(o, this.audioContext, p.URL);
-        e(n);
+      const s = new AudioContext(), n = await (await fetch(t)).arrayBuffer();
+      s.decodeAudioData(n, async (o) => {
+        const h = new v(o, s, d.URL);
+        e(h);
       });
     });
   }
   async createBufferTrack(t) {
     return new Promise(async (e) => {
-      this.audioContext.decodeAudioData(t, async (s) => {
-        const i = new S(
+      const s = new AudioContext();
+      s.decodeAudioData(t, async (i) => {
+        const n = new v(
+          i,
           s,
-          this.audioContext,
-          p.BUFFER
+          d.BUFFER
         );
-        e(i);
+        e(n);
       });
     });
   }
   async createMicrophoneTrack(t = !0) {
     return new Promise(async (e) => {
-      const s = await navigator.mediaDevices.getUserMedia({
+      const s = new AudioContext(), i = await navigator.mediaDevices.getUserMedia({
         audio: t,
         video: !1
-      }), i = new S(s, this.audioContext, p.MICROPHONE);
-      e(i);
+      }), n = new v(i, s, d.MICROPHONE);
+      e(n);
     });
   }
 }
 export {
-  S as Track,
-  H as Yami
+  v as Track,
+  V as Yami
 };
