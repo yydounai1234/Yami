@@ -7,24 +7,30 @@
 				<v-row dense>
 					<v-col cols="6">
 						<v-card title="链接播放">
-							<v-card-item style="min-height:250px">
+							<v-card-item style="min-height:300px">
 								<v-text-field label="播放地址" v-model="audioUrl"></v-text-field>
-								<v-slider v-model="urlVolume" step="0.1" color="green" label="音量" :max="10"
+								<v-slider v-model="urlVolume" step="0.1" color="green" label="音量" :max="2"
 									prepend-icon="mdi-volume-high"></v-slider>
-								<v-slider v-model="urlPitch" step="0.1" color="green" label="音调" :max="2"
+								<v-slider v-model="urlPitch" step="0.1" color="green" label="声调" :max="2"
 									prepend-icon="mdi-volume-high"></v-slider>
-								<v-slider v-model="urlProgress" label="进度" color="green" prepend-icon="mdi-volume-high"></v-slider>
+								<v-slider v-model="urlProgress" label="进度" :max="urlDuration" color="green"
+									prepend-icon="mdi-volume-high" @click="changeProgress"></v-slider>
 							</v-card-item>
 							<v-card-actions>
 								<v-btn @click="playURLSource" color="secondary" variant="flat"> 播放 </v-btn>
+								<v-btn @click="resumeURLSource" color="green" variant="flat"> 继续 </v-btn>
+								<v-btn @click="pauseURLSource" color="error" variant="flat"> 暂停 </v-btn>
 								<v-btn @click="stopURLSource" color="error" variant="flat"> 停止 </v-btn>
 							</v-card-actions>
 						</v-card>
 					</v-col>
 					<v-col cols="6">
 						<v-card title="麦克风播放">
-							<v-card-item style="min-height:250px">
-								<v-slider v-model="currentTime" prepend-icon="mdi-volume-high"></v-slider>
+							<v-card-item style="min-height:300px">
+								<v-slider v-model="micoPhoneVolume" step="0.1" color="green" label="音量" :max="2"
+									prepend-icon="mdi-volume-high"></v-slider>
+								<v-slider v-model="micoPhonePitch" step="0.1" color="green" label="声调" :max="2"
+									prepend-icon="mdi-volume-high"></v-slider>
 							</v-card-item>
 							<v-card-actions>
 								<v-btn @click="playMicoPhoneSource" color="secondary" variant="flat"> 播放 </v-btn>
@@ -45,37 +51,78 @@ import { ref, watch } from 'vue'
 let urlTrack: Track | null = null
 let micoPhoneTrack: Track | null = null
 let yami: Yami | null = null
+let timer: ReturnType<typeof setInterval>
 
 const currentTime = ref(0)
 const audioUrl = ref('/bensound-actionable.mp3')
 const urlVolume = ref(1)
 const urlProgress = ref(0)
-const urlPitch = ref(1)
+const urlPitch = ref(1.6)
+const urlDuration = ref(0)
+const micoPhoneVolume = ref(1)
+const micoPhonePitch = ref(1.6)
 
+/** 监听 url 音调 */
 watch(urlPitch, (newVal) => {
 	urlTrack && (urlTrack.pitch = newVal)
 })
 
+/** 监听 url 音量 */
+watch(urlVolume, (newVal) => {
+	urlTrack && (urlTrack.volume = newVal)
+})
+
+/** 监听 micoPhone 音调 */
+watch(micoPhonePitch, (newVal) => {
+	micoPhoneTrack && (micoPhoneTrack.pitch = newVal)
+})
+
+/** 监听 micoPhone 音量 */
+watch(micoPhoneVolume, (newVal) => {
+	micoPhoneTrack && (micoPhoneTrack.volume = newVal)
+})
+
 const playURLSource = async () => {
+	urlTrack && urlTrack.release()
+	clearInterval(timer)
 	let _yami = yami ?? new Yami()
 	urlTrack = await _yami.createURLTrack(audioUrl.value)
 	urlTrack.pitch = urlPitch.value
+	urlTrack.volume = urlVolume.value
+	urlDuration.value = urlTrack.duration
+	timer = setInterval(() => {
+		urlTrack && (urlProgress.value = urlTrack.currentTime)
+	}, 1000)
 	urlTrack.play()
 }
 
 const stopURLSource = async () => {
-	// todo
+	clearInterval(timer)
+	urlTrack && urlTrack.release()
 }
 
 const playMicoPhoneSource = async () => {
-	const yami = new Yami()
-	micoPhoneTrack = await yami.createMicrophoneTrack()
-	micoPhoneTrack.pitch = 0.7
+	let _yami = yami ?? new Yami()
+	micoPhoneTrack = await _yami.createMicrophoneTrack()
+	micoPhoneTrack.pitch = micoPhonePitch.value
+	micoPhoneTrack.volume = micoPhoneVolume.value
 	micoPhoneTrack.play()
 }
 
+const resumeURLSource = () => {
+	urlTrack && urlTrack.resume()
+}
+
+const pauseURLSource = () => {
+	urlTrack && urlTrack.pause()
+}
+
 const stopMicoPhoneSource = async () => {
-	// todo
+	micoPhoneTrack && micoPhoneTrack.release()
+}
+
+const changeProgress = () => {
+	urlTrack && urlTrack.seek(urlProgress.value)
 }
 
 

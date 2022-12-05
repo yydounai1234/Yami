@@ -5,7 +5,6 @@ import Track, { TrackType } from './track'
  * @remarks 主要用于创建各种音频轨
  */
 export default class Yami {
-  private audioContext = new AudioContext()
 
   /**
    * 根据 url 创建音频轨
@@ -14,10 +13,11 @@ export default class Yami {
    */
   async createURLTrack(url: string): Promise<Track> {
     return new Promise(async (resolve) => {
+      const audioContext = new AudioContext()
       const response = await fetch(url)
       const buffer = await response.arrayBuffer()
-      this.audioContext.decodeAudioData(buffer, async (audioBuffer) => {
-        const track = new Track(audioBuffer, this.audioContext, TrackType.URL)
+      audioContext.decodeAudioData(buffer, async (audioBuffer) => {
+        const track = new Track(audioBuffer, audioContext, TrackType.URL)
         resolve(track)
       })
     })
@@ -29,10 +29,11 @@ export default class Yami {
    */
   async createBufferTrack(buffer: ArrayBuffer): Promise<Track> {
     return new Promise(async (resolve) => {
-      this.audioContext.decodeAudioData(buffer, async (audioBuffer) => {
+      const audioContext = new AudioContext()
+      audioContext.decodeAudioData(buffer, async (audioBuffer) => {
         const track = new Track(
           audioBuffer,
-          this.audioContext,
+          audioContext,
           TrackType.BUFFER
         )
         resolve(track)
@@ -46,11 +47,12 @@ export default class Yami {
    */
   async createMicrophoneTrack(config: MediaTrackConstraints | boolean = true): Promise<Track> {
     return new Promise(async (resolve) => {
+      const audioContext = new AudioContext()
       const stream = await navigator.mediaDevices.getUserMedia({
         audio: config,
         video: false,
       })
-      const track = new Track(stream, this.audioContext, TrackType.MICROPHONE)
+      const track = new Track(stream, audioContext, TrackType.MICROPHONE)
       resolve(track)
     })
   }
