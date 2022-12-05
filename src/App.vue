@@ -2,10 +2,10 @@
 	<v-app>
 		<v-app-bar color="teal-darken-4" image="https://picsum.photos/1920/1080?random" title="Yami">
 		</v-app-bar>
-		<v-main>
+		<v-main scrollable>
 			<v-container>
 				<v-row dense>
-					<v-col cols="6">
+					<v-col sm="6">
 						<v-card title="链接播放">
 							<v-card-item style="min-height:300px">
 								<v-text-field label="播放地址" v-model="audioUrl"></v-text-field>
@@ -24,9 +24,10 @@
 							</v-card-actions>
 						</v-card>
 					</v-col>
-					<v-col cols="6">
+					<v-col sm="6">
 						<v-card title="麦克风播放">
 							<v-card-item style="min-height:300px">
+								<p class="mb-5 text-body-2">建议使用耳机使用该功能，否则可能会导致啸叫</p>
 								<v-slider v-model="micoPhoneVolume" step="0.1" color="green" label="音量" :max="2"
 									prepend-icon="mdi-volume-high"></v-slider>
 								<v-slider v-model="micoPhonePitch" step="0.1" color="green" label="声调" :max="2"
@@ -54,7 +55,7 @@ let yami: Yami | null = null
 let timer: ReturnType<typeof setInterval>
 
 const currentTime = ref(0)
-const audioUrl = ref('/440278627.mp3')
+const audioUrl = ref('./440278627.mp3')
 const urlVolume = ref(1)
 const urlProgress = ref(0)
 const urlPitch = ref(1.6)
