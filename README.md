@@ -7,12 +7,11 @@
 - 1.支持 Typescript
 - 2.支持原生 ESM
 - 3.支持麦克风设备实时变声
-- 4.代码量较小
+- 4.接口更简洁
 
 缺点在于：
 
 - 1.不支持变速
-- 2.可能不够稳定
 
 > 由于使用 **ScriptProcessorNode** 的音频数据输入进行实时变声处理，所以不支持变速功能，如果需要使用到变速功能并且不使用音频流，可以使用 [SoundTouchJS](https://github.com/cutterbl/SoundTouchJS)。
 
@@ -86,6 +85,17 @@ track.play()
 ## 使用文档
 
 具体的使用文档指南可以查看 [Yami](https://yydounai1234.github.io/Yami/)。
+
+## DEMO
+
+- 下载源码
+
+```text
+git clone git@github.com:yydounai1234/Yami.git
+yarn install
+yarn dev
+```
+
 
 ## LICENSE
 
