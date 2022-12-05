@@ -15,6 +15,16 @@
 
 > 由于使用 **ScriptProcessorNode** 的音频数据输入进行实时变声处理，所以不支持变速功能，如果需要使用到变速功能并且不使用音频流，可以使用 [SoundTouchJS](https://github.com/cutterbl/SoundTouchJS)。
 
+## DEMO
+
+- [在线 DEMO](https://yydounai1234.github.io/yami-voice/)
+- 下载源码
+
+```text
+git clone git@github.com:yydounai1234/Yami.git
+yarn install
+yarn dev
+```
 
 ## 安装
 
@@ -85,17 +95,6 @@ track.play()
 ## 使用文档
 
 具体的使用文档指南可以查看 [Yami](https://yydounai1234.github.io/Yami/)。
-
-## DEMO
-
-- 下载源码
-
-```text
-git clone git@github.com:yydounai1234/Yami.git
-yarn install
-yarn dev
-```
-
 
 ## LICENSE
 
