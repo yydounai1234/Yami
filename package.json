@@ -22,6 +22,7 @@
     "build-type": "tsc --emitDeclarationOnly -d && api-extractor run --local"
   },
   "devDependencies": {
+    "@mdi/font": "^7.0.96",
     "@microsoft/api-extractor": "^7.33.6",
     "@vitejs/plugin-vue": "^3.2.0",
     "typedoc": "^0.23.21",
