@@ -54,7 +54,7 @@ let yami: Yami | null = null
 let timer: ReturnType<typeof setInterval>
 
 const currentTime = ref(0)
-const audioUrl = ref('/bensound-actionable.mp3')
+const audioUrl = ref('/440278627.mp3')
 const urlVolume = ref(1)
 const urlProgress = ref(0)
 const urlPitch = ref(1.6)
