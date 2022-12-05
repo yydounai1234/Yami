@@ -1,24 +1,4 @@
 /**
- * 检查范围
- * @public
- * @remarks 目标值限定在两数范围内
- * @param x - 目标值
- * @param mi - 最小值
- * @param ma - 最大值
- * @returns 输出值
- */
-export declare const checkLimits: (x: number, mi: number, ma: number) => number;
-
-/**
- * 判定两个浮点数是否相等
- * @public
- * @param a - 浮点数 a
- * @param b - 浮点数 b
- * @returns 是否相等
- */
-export declare const testFloatEqual: (a: number, b: number) => boolean;
-
-/**
  * 音频类
  * @public
  * @remarks 主要用于播放音频以及获取音频内容
@@ -27,27 +7,61 @@ export declare class Track {
     private source;
     private audioContext;
     type: TrackType;
+    private sourceDuration;
     private bufferSize;
     private sourceNode;
     private scriptNode;
     private soundTouch;
     private processBuffer;
+    private gainNode;
     constructor(source: AudioBuffer | MediaStream, audioContext: AudioContext, type: TrackType);
-    set pitch(newVal: number);
+    init(): void;
     /**
      * 获取变调
      */
     get pitch(): number;
+    set pitch(newVal: number);
+    /**
+     * 获取音量
+     */
+    get volume(): number;
+    set volume(newVal: number);
+    /**
+     * 获取音频时长
+     */
+    get duration(): number;
+    /**
+     * 获取当前时间
+     */
+    get currentTime(): number;
     /**
      * 播放
      */
-    play(): Promise<void>;
+    play(offset?: number): Promise<void>;
+    /**
+     * 恢复
+     */
+    resume(): void;
+    /**
+     * 暂停
+     */
+    pause(): void;
+    /**
+     * seek
+     * @param time seek 指定时间
+     */
+    seek(time: number): void;
     /**
      * 获取数据
      * @remarks 该接口会造成 UI/JS 线程阻塞
      * @returns 获取处理后的数据
      */
     process(): Float32Array;
+    /**
+     *  释放资源
+     */
+    release(): void;
+    private resetSourceDuration;
 }
 
 /**
@@ -75,7 +89,6 @@ export declare enum TrackType {
  * @remarks 主要用于创建各种音频轨
  */
 export declare class Yami {
-    private audioContext;
     /**
      * 根据 url 创建音频轨
      * @param url - 音频地址
