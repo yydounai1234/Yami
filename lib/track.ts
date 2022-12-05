@@ -172,8 +172,8 @@ export default class Track {
 			}
 		}
 		if (this.sourceNode && isAudioBufferSourceNode(this.sourceNode)) {
-      this.sourceDuration.startTime = this.audioContext.currentTime
-      this.sourceDuration.offsetTime = offset
+			this.sourceDuration.startTime = this.audioContext.currentTime
+			this.sourceDuration.offsetTime = offset
 			this.sourceNode.start(0, offset)
 		}
 	}
@@ -196,9 +196,9 @@ export default class Track {
 	public pause() {
 		if (this.sourceNode && isAudioBufferSourceNode(this.sourceNode)) {
 			this.sourceNode.playbackRate.value = Number.MIN_VALUE
-      if (!this.sourceDuration.lastPauseTime) {
-        this.sourceDuration.lastPauseTime = this.audioContext.currentTime
-      }
+			if (!this.sourceDuration.lastPauseTime) {
+				this.sourceDuration.lastPauseTime = this.audioContext.currentTime
+			}
 		}
 	}
 
@@ -208,7 +208,7 @@ export default class Track {
 	 */
 	seek(time: number) {
 		this.release()
-    this.init()
+		this.init()
 		this.play(time)
 	}
 
