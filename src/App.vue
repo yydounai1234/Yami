@@ -12,9 +12,9 @@
 								<v-slider v-model="urlVolume" step="0.1" color="green" label="音量" :max="2"
 									prepend-icon="mdi-volume-high"></v-slider>
 								<v-slider v-model="urlPitch" step="0.1" color="green" label="声调" :max="2"
-									prepend-icon="mdi-volume-high"></v-slider>
+									prepend-icon="mdi-microphone"></v-slider>
 								<v-slider v-model="urlProgress" label="进度" :max="urlDuration" color="green"
-									prepend-icon="mdi-volume-high" @click="changeProgress"></v-slider>
+									prepend-icon="mdi-progress-clock" @click="changeProgress"></v-slider>
 							</v-card-item>
 							<v-card-actions>
 								<v-btn @click="playURLSource" color="secondary" variant="flat"> 播放 </v-btn>
@@ -31,7 +31,7 @@
 								<v-slider v-model="micoPhoneVolume" step="0.1" color="green" label="音量" :max="2"
 									prepend-icon="mdi-volume-high"></v-slider>
 								<v-slider v-model="micoPhonePitch" step="0.1" color="green" label="声调" :max="2"
-									prepend-icon="mdi-volume-high"></v-slider>
+									prepend-icon="mdi-microphone"></v-slider>
 							</v-card-item>
 							<v-card-actions>
 								<v-btn @click="playMicoPhoneSource" color="secondary" variant="flat"> 播放 </v-btn>
@@ -55,10 +55,10 @@ let yami: Yami | null = null
 let timer: ReturnType<typeof setInterval>
 
 const currentTime = ref(0)
-const audioUrl = ref('./440278627.mp3')
+const audioUrl = ref('https://m10.music.126.net/20221206184352/debb3a842668faefaea6c22462b9c4b4/ymusic/1ec1/443b/2fe2/d7bce637483ad91c832bd036a7dc5e3c.mp3')
 const urlVolume = ref(1)
 const urlProgress = ref(0)
-const urlPitch = ref(1.6)
+const urlPitch = ref(1.25)
 const urlDuration = ref(0)
 const micoPhoneVolume = ref(1)
 const micoPhonePitch = ref(1.6)
