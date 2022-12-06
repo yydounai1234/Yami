@@ -94,7 +94,7 @@ track.play()
 
 ## 使用文档
 
-具体的使用文档指南可以查看 [Yami](https://github.com/yydounai1234/Yami/tree/master/docs)。
+具体的使用文档指南可以查看 [Yami](https://yydounai1234.github.io/Yami/)。
 
 ## LICENSE
 
