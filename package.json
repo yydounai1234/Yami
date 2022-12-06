@@ -18,7 +18,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "doc": "typedoc lib/main.ts --theme github-wiki",
+    "doc": "typedoc lib/main.ts --theme github-wiki --out wiki",
     "build-type": "tsc --emitDeclarationOnly -d && api-extractor run --local",
     "page": "vite build -c ./vite.page.ts"
   },

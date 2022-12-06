@@ -20,7 +20,7 @@
 
 #### Defined in
 
-[track.ts:20](https://github.com/yydounai1234/Baga/blob/2cd48e4/lib/track.ts#L20)
+[track.ts:20](https://github.com/yydounai1234/Baga/blob/ed91fa0/lib/track.ts#L20)
 
 ___
 
@@ -32,7 +32,7 @@ ___
 
 #### Defined in
 
-[track.ts:24](https://github.com/yydounai1234/Baga/blob/2cd48e4/lib/track.ts#L24)
+[track.ts:24](https://github.com/yydounai1234/Baga/blob/ed91fa0/lib/track.ts#L24)
 
 ___
 
@@ -44,4 +44,4 @@ ___
 
 #### Defined in
 
-[track.ts:16](https://github.com/yydounai1234/Baga/blob/2cd48e4/lib/track.ts#L16)
+[track.ts:16](https://github.com/yydounai1234/Baga/blob/ed91fa0/lib/track.ts#L16)
