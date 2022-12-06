@@ -1,3 +1,5 @@
+yami-voice / [Exports](modules.md)
+
 # Yami
 
 使用 **SoundTouch** 提供的变声核心逻辑，通过 **audioContenxt** 将音频资源、音频文件或音频流进行实时变声处理。
@@ -94,7 +96,7 @@ track.play()
 
 ## 使用文档
 
-具体的使用文档指南可以查看 [Yami](https://github.com/yydounai1234/Yami/tree/master/docs)。
+具体的使用文档指南可以查看 [Yami](https://github.com/yydounai1234/Yami/tree/master/wiki/Exports.md)。
 
 ## LICENSE
 

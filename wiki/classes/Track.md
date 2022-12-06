@@ -1,3 +1,5 @@
+[yami-voice](../README.md) / [Exports](../modules.md) / Track
+
 # Class: Track
 
 音频类
@@ -10,38 +12,38 @@
 
 ### Constructors
 
-- [constructor](../wiki/Track#constructor)
+- [constructor](Track.md#constructor)
 
 ### Properties
 
-- [audioContext](../wiki/Track#audiocontext)
-- [bufferSize](../wiki/Track#buffersize)
-- [gainNode](../wiki/Track#gainnode)
-- [processBuffer](../wiki/Track#processbuffer)
-- [scriptNode](../wiki/Track#scriptnode)
-- [soundTouch](../wiki/Track#soundtouch)
-- [source](../wiki/Track#source)
-- [sourceDuration](../wiki/Track#sourceduration)
-- [sourceNode](../wiki/Track#sourcenode)
-- [type](../wiki/Track#type)
+- [audioContext](Track.md#audiocontext)
+- [bufferSize](Track.md#buffersize)
+- [gainNode](Track.md#gainnode)
+- [processBuffer](Track.md#processbuffer)
+- [scriptNode](Track.md#scriptnode)
+- [soundTouch](Track.md#soundtouch)
+- [source](Track.md#source)
+- [sourceDuration](Track.md#sourceduration)
+- [sourceNode](Track.md#sourcenode)
+- [type](Track.md#type)
 
 ### Accessors
 
-- [currentTime](../wiki/Track#currenttime)
-- [duration](../wiki/Track#duration)
-- [pitch](../wiki/Track#pitch)
-- [volume](../wiki/Track#volume)
+- [currentTime](Track.md#currenttime)
+- [duration](Track.md#duration)
+- [pitch](Track.md#pitch)
+- [volume](Track.md#volume)
 
 ### Methods
 
-- [init](../wiki/Track#init)
-- [pause](../wiki/Track#pause)
-- [play](../wiki/Track#play)
-- [process](../wiki/Track#process)
-- [release](../wiki/Track#release)
-- [resetSourceDuration](../wiki/Track#resetsourceduration)
-- [resume](../wiki/Track#resume)
-- [seek](../wiki/Track#seek)
+- [init](Track.md#init)
+- [pause](Track.md#pause)
+- [play](Track.md#play)
+- [process](Track.md#process)
+- [release](Track.md#release)
+- [resetSourceDuration](Track.md#resetsourceduration)
+- [resume](Track.md#resume)
+- [seek](Track.md#seek)
 
 ## Constructors
 
@@ -55,11 +57,11 @@
 | :------ | :------ |
 | `source` | `AudioBuffer` \| `MediaStream` |
 | `audioContext` | `AudioContext` |
-| `type` | [`TrackType`](../wiki/TrackType) |
+| `type` | [`TrackType`](../enums/TrackType.md) |
 
 #### Defined in
 
-[track.ts:60](https://github.com/yydounai1234/Baga/blob/ed91fa0/lib/track.ts#L60)
+[track.ts:60](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/track.ts#L60)
 
 ## Properties
 
@@ -69,7 +71,7 @@
 
 #### Defined in
 
-[track.ts:62](https://github.com/yydounai1234/Baga/blob/ed91fa0/lib/track.ts#L62)
+[track.ts:62](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/track.ts#L62)
 
 ___
 
@@ -79,7 +81,7 @@ ___
 
 #### Defined in
 
-[track.ts:51](https://github.com/yydounai1234/Baga/blob/ed91fa0/lib/track.ts#L51)
+[track.ts:51](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/track.ts#L51)
 
 ___
 
@@ -89,7 +91,7 @@ ___
 
 #### Defined in
 
-[track.ts:59](https://github.com/yydounai1234/Baga/blob/ed91fa0/lib/track.ts#L59)
+[track.ts:59](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/track.ts#L59)
 
 ___
 
@@ -99,7 +101,7 @@ ___
 
 #### Defined in
 
-[track.ts:58](https://github.com/yydounai1234/Baga/blob/ed91fa0/lib/track.ts#L58)
+[track.ts:58](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/track.ts#L58)
 
 ___
 
@@ -109,7 +111,7 @@ ___
 
 #### Defined in
 
-[track.ts:56](https://github.com/yydounai1234/Baga/blob/ed91fa0/lib/track.ts#L56)
+[track.ts:56](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/track.ts#L56)
 
 ___
 
@@ -119,7 +121,7 @@ ___
 
 #### Defined in
 
-[track.ts:57](https://github.com/yydounai1234/Baga/blob/ed91fa0/lib/track.ts#L57)
+[track.ts:57](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/track.ts#L57)
 
 ___
 
@@ -129,7 +131,7 @@ ___
 
 #### Defined in
 
-[track.ts:61](https://github.com/yydounai1234/Baga/blob/ed91fa0/lib/track.ts#L61)
+[track.ts:61](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/track.ts#L61)
 
 ___
 
@@ -148,7 +150,7 @@ ___
 
 #### Defined in
 
-[track.ts:45](https://github.com/yydounai1234/Baga/blob/ed91fa0/lib/track.ts#L45)
+[track.ts:45](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/track.ts#L45)
 
 ___
 
@@ -158,17 +160,17 @@ ___
 
 #### Defined in
 
-[track.ts:52](https://github.com/yydounai1234/Baga/blob/ed91fa0/lib/track.ts#L52)
+[track.ts:52](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/track.ts#L52)
 
 ___
 
 ### type
 
-• **type**: [`TrackType`](../wiki/TrackType)
+• **type**: [`TrackType`](../enums/TrackType.md)
 
 #### Defined in
 
-[track.ts:63](https://github.com/yydounai1234/Baga/blob/ed91fa0/lib/track.ts#L63)
+[track.ts:63](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/track.ts#L63)
 
 ## Accessors
 
@@ -184,7 +186,7 @@ ___
 
 #### Defined in
 
-[track.ts:125](https://github.com/yydounai1234/Baga/blob/ed91fa0/lib/track.ts#L125)
+[track.ts:125](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/track.ts#L125)
 
 ___
 
@@ -200,7 +202,7 @@ ___
 
 #### Defined in
 
-[track.ts:114](https://github.com/yydounai1234/Baga/blob/ed91fa0/lib/track.ts#L114)
+[track.ts:114](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/track.ts#L114)
 
 ___
 
@@ -216,7 +218,7 @@ ___
 
 #### Defined in
 
-[track.ts:92](https://github.com/yydounai1234/Baga/blob/ed91fa0/lib/track.ts#L92)
+[track.ts:92](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/track.ts#L92)
 
 • `set` **pitch**(`newVal`): `void`
 
@@ -232,7 +234,7 @@ ___
 
 #### Defined in
 
-[track.ts:96](https://github.com/yydounai1234/Baga/blob/ed91fa0/lib/track.ts#L96)
+[track.ts:96](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/track.ts#L96)
 
 ___
 
@@ -248,7 +250,7 @@ ___
 
 #### Defined in
 
-[track.ts:103](https://github.com/yydounai1234/Baga/blob/ed91fa0/lib/track.ts#L103)
+[track.ts:103](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/track.ts#L103)
 
 • `set` **volume**(`newVal`): `void`
 
@@ -264,7 +266,7 @@ ___
 
 #### Defined in
 
-[track.ts:107](https://github.com/yydounai1234/Baga/blob/ed91fa0/lib/track.ts#L107)
+[track.ts:107](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/track.ts#L107)
 
 ## Methods
 
@@ -278,7 +280,7 @@ ___
 
 #### Defined in
 
-[track.ts:68](https://github.com/yydounai1234/Baga/blob/ed91fa0/lib/track.ts#L68)
+[track.ts:68](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/track.ts#L68)
 
 ___
 
@@ -294,7 +296,7 @@ ___
 
 #### Defined in
 
-[track.ts:196](https://github.com/yydounai1234/Baga/blob/ed91fa0/lib/track.ts#L196)
+[track.ts:196](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/track.ts#L196)
 
 ___
 
@@ -316,7 +318,7 @@ ___
 
 #### Defined in
 
-[track.ts:141](https://github.com/yydounai1234/Baga/blob/ed91fa0/lib/track.ts#L141)
+[track.ts:141](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/track.ts#L141)
 
 ___
 
@@ -338,7 +340,7 @@ ___
 
 #### Defined in
 
-[track.ts:220](https://github.com/yydounai1234/Baga/blob/ed91fa0/lib/track.ts#L220)
+[track.ts:220](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/track.ts#L220)
 
 ___
 
@@ -354,7 +356,7 @@ ___
 
 #### Defined in
 
-[track.ts:241](https://github.com/yydounai1234/Baga/blob/ed91fa0/lib/track.ts#L241)
+[track.ts:241](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/track.ts#L241)
 
 ___
 
@@ -368,7 +370,7 @@ ___
 
 #### Defined in
 
-[track.ts:257](https://github.com/yydounai1234/Baga/blob/ed91fa0/lib/track.ts#L257)
+[track.ts:257](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/track.ts#L257)
 
 ___
 
@@ -384,7 +386,7 @@ ___
 
 #### Defined in
 
-[track.ts:184](https://github.com/yydounai1234/Baga/blob/ed91fa0/lib/track.ts#L184)
+[track.ts:184](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/track.ts#L184)
 
 ___
 
@@ -406,4 +408,4 @@ seek
 
 #### Defined in
 
-[track.ts:209](https://github.com/yydounai1234/Baga/blob/ed91fa0/lib/track.ts#L209)
+[track.ts:209](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/track.ts#L209)
