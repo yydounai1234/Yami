@@ -17,7 +17,7 @@
 
 ## DEMO
 
-- [在线 DEMO](https://yydounai1234.github.io/yami-voice/)
+- [在线 DEMO](https://yydounai1234.github.io/Yami/)
 - 下载源码
 
 ```text
