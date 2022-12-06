@@ -5,6 +5,7 @@
 import SoundTouch from './sound'
 import SampleBuffer from './sampleBuffer'
 import * as CONSTANT from './constant'
+import { drawTimeDomain, drawFrequencyDomain } from './analyser'
 /**
  * 音频轨类型
  * @public
@@ -57,6 +58,7 @@ export default class Track {
   private soundTouch = new SoundTouch()
   private processBuffer = new SampleBuffer()
   private gainNode: GainNode | undefined
+  private analyserNode: AnalyserNode | undefined
   constructor(
     private source: AudioBuffer | MediaStream,
     private audioContext: AudioContext,
@@ -80,7 +82,9 @@ export default class Track {
       2,
       2
     )
-    this.sourceNode.connect(this.scriptNode)
+    this.analyserNode = this.audioContext.createAnalyser()
+    this.sourceNode.connect(this.analyserNode)
+    this.analyserNode.connect(this.scriptNode)
     this.gainNode = this.audioContext.createGain()
     this.scriptNode.connect(this.gainNode)
     this.gainNode.connect(this.audioContext.destination)
@@ -241,6 +245,7 @@ export default class Track {
   release() {
     if (this.sourceNode) {
       this.gainNode && this.gainNode.disconnect()
+      this.analyserNode && this.analyserNode.disconnect()
       this.sourceNode.disconnect()
       this.scriptNode && this.scriptNode.disconnect()
       if (!isAudioBufferSourceNode(this.sourceNode)) {
@@ -252,6 +257,22 @@ export default class Track {
         this.sourceNode.onended = null
       }
     }
+  }
+
+  /**
+   * 绘制时域图片
+   * @param canvas 画布
+   */
+  drawTimeDomain(canvas: HTMLCanvasElement) {
+    this.analyserNode && drawTimeDomain(this.analyserNode, canvas)
+  }
+
+  /**
+   * 绘制频域图片
+   * @param canvas 画布
+   */
+  drawFrequencyDomain(canvas: HTMLCanvasElement) {
+    this.analyserNode && drawFrequencyDomain(this.analyserNode, canvas)
   }
 
   private resetSourceDuration(): void {

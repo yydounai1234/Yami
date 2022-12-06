@@ -15,6 +15,8 @@
 									prepend-icon="mdi-microphone"></v-slider>
 								<v-slider v-model="urlProgress" label="进度" :max="urlDuration" color="green"
 									prepend-icon="mdi-progress-clock" @click="changeProgress"></v-slider>
+								<canvas id="aa" width="480" height="360"></canvas>
+								<canvas id="bb" width="480" height="360"></canvas>
 							</v-card-item>
 							<v-card-actions>
 								<v-btn @click="playURLSource" color="secondary" variant="flat"> 播放 </v-btn>
@@ -95,6 +97,8 @@ const playURLSource = async () => {
 		urlTrack && (urlProgress.value = urlTrack.currentTime)
 	}, 1000)
 	urlTrack.play()
+	urlTrack.drawTimeDomain(document.getElementById("aa")!)
+	urlTrack.drawFrequencyDomain(document.getElementById("bb")!)
 }
 
 const stopURLSource = async () => {
