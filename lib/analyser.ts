@@ -8,7 +8,9 @@ export const drawTimeDomain = (
   analyser: AnalyserNode,
   canvas: HTMLCanvasElement
 ) => {
-  analyser.fftSize = 2048
+    const WIDTH = canvas.width
+  const HEIGHT = canvas.height
+  analyser.fftSize = 256
   const canvasCtx = canvas.getContext('2d')
   if (canvasCtx !== null) {
     const bufferLength = analyser.fftSize
@@ -19,11 +21,11 @@ export const drawTimeDomain = (
 
       analyser.getByteTimeDomainData(dataArray)
 
-      canvasCtx.fillStyle = 'rgb(200, 200, 200)'
+      canvasCtx.fillStyle = 'rgb(255, 255, 255)'
       canvasCtx.fillRect(0, 0, WIDTH, HEIGHT)
 
-      canvasCtx.lineWidth = 2
-      canvasCtx.strokeStyle = 'rgb(0, 0, 0)'
+      canvasCtx.lineWidth = 5
+      canvasCtx.strokeStyle = 'rgb(100, 218, 198)'
 
       canvasCtx.beginPath()
 
@@ -57,6 +59,8 @@ export const drawFrequencyDomain = (
   analyser: AnalyserNode,
   canvas: HTMLCanvasElement
 ) => {
+  const WIDTH = canvas.width
+  const HEIGHT = canvas.height
   analyser.fftSize = 256
   const canvasCtx = canvas.getContext('2d')
   if (canvasCtx !== null) {
@@ -67,17 +71,17 @@ export const drawFrequencyDomain = (
       requestAnimationFrame(_drawFrequencyDomain)
       analyser.getByteFrequencyData(dataArray)
 
-      canvasCtx.fillStyle = 'rgb(0, 0, 0)'
+      canvasCtx.fillStyle = 'rgb(255, 255, 255)'
       canvasCtx.fillRect(0, 0, WIDTH, HEIGHT)
 
-      var barWidth = (WIDTH / bufferLength) * 2.5
-      var barHeight
-      var x = 0
+      const barWidth = (WIDTH / bufferLength) * 2.5
+      let barHeight = 0
+      let x = 0
 
       for (var i = 0; i < bufferLength; i++) {
         barHeight = dataArray[i]
 
-        canvasCtx.fillStyle = 'rgb(' + (barHeight + 100) + ',50,50)'
+        canvasCtx.fillStyle = 'rgb(' + (barHeight) + ',218,198)'
         canvasCtx.fillRect(x, HEIGHT - barHeight / 2, barWidth, barHeight / 2)
 
         x += barWidth + 1

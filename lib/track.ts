@@ -101,6 +101,15 @@ export default class Track {
     this.soundTouch.pitch = newVal
   }
 
+  /** 获取傅立叶变化窗口大小 */
+  set fftSize(newVal: number) {
+    this.analyserNode && (this.analyserNode.fftSize = newVal)
+  }
+
+  get fftSize() {
+    return this.analyserNode ? this.analyserNode.fftSize : -1
+  }
+
   /**
    * 获取音量
    */
@@ -263,8 +272,15 @@ export default class Track {
    * 绘制时域图片
    * @param canvas 画布
    */
-  drawTimeDomain(canvas: HTMLCanvasElement) {
-    this.analyserNode && drawTimeDomain(this.analyserNode, canvas)
+  getTimeDomainData(): Uint8Array {
+    if (this.analyserNode) {
+      const bufferLength = this.analyserNode.frequencyBinCount
+      const dataArray = new Uint8Array(bufferLength)
+      this.analyserNode.getByteFrequencyData(dataArray)
+      return dataArray
+    } else {
+      throw "error"
+    }
   }
 
   /**

@@ -15,8 +15,8 @@
 									prepend-icon="mdi-microphone"></v-slider>
 								<v-slider v-model="urlProgress" label="进度" :max="urlDuration" color="green"
 									prepend-icon="mdi-progress-clock" @click="changeProgress"></v-slider>
-								<canvas id="aa" width="480" height="360"></canvas>
-								<canvas id="bb" width="480" height="360"></canvas>
+								<canvas id="aa" style="width: 100%;height: 100px"></canvas>
+								<canvas id="bb" style="width: 100%;height: 100px"></canvas>
 							</v-card-item>
 							<v-card-actions>
 								<v-btn @click="playURLSource" color="secondary" variant="flat"> 播放 </v-btn>
@@ -57,7 +57,7 @@ let yami: Yami | null = null
 let timer: ReturnType<typeof setInterval>
 
 const currentTime = ref(0)
-const audioUrl = ref('https://m10.music.126.net/20221206184352/debb3a842668faefaea6c22462b9c4b4/ymusic/1ec1/443b/2fe2/d7bce637483ad91c832bd036a7dc5e3c.mp3')
+const audioUrl = ref('./440278627.mp3')
 const urlVolume = ref(1)
 const urlProgress = ref(0)
 const urlPitch = ref(1.25)
