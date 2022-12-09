@@ -2,7 +2,6 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
 export default defineConfig((option) => {
-	console.log(option, "====================")
 	const mode = option.mode
 	const config = {
 		build: {

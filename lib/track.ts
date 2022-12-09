@@ -5,7 +5,6 @@
 import SoundTouch from './sound'
 import SampleBuffer from './sampleBuffer'
 import * as CONSTANT from './constant'
-import { drawTimeDomain, drawFrequencyDomain } from './analyser'
 /**
  * 音频轨类型
  * @public
@@ -152,7 +151,7 @@ export default class Track {
    * 播放
    */
   async play(offset = 0) {
-    let playFlag = false
+    let playFlag = this.type === TrackType.MICROPHONE
     if (this.scriptNode) {
       this.scriptNode.onaudioprocess = async (audioProcessingEvent) => {
         const outputBuffer = audioProcessingEvent.outputBuffer
@@ -270,13 +269,12 @@ export default class Track {
 
   /**
    * 绘制时域图片
-   * @param canvas 画布
    */
   getTimeDomainData(): Uint8Array {
     if (this.analyserNode) {
-      const bufferLength = this.analyserNode.frequencyBinCount
+      const bufferLength = this.analyserNode.fftSize
       const dataArray = new Uint8Array(bufferLength)
-      this.analyserNode.getByteFrequencyData(dataArray)
+      this.analyserNode.getByteTimeDomainData(dataArray)
       return dataArray
     } else {
       throw "error"
@@ -285,10 +283,16 @@ export default class Track {
 
   /**
    * 绘制频域图片
-   * @param canvas 画布
    */
-  drawFrequencyDomain(canvas: HTMLCanvasElement) {
-    this.analyserNode && drawFrequencyDomain(this.analyserNode, canvas)
+  getFrequencyDomainData(): Uint8Array {
+    if (this.analyserNode) {
+      const bufferLength = this.analyserNode.frequencyBinCount
+      const dataArray = new Uint8Array(bufferLength)
+      this.analyserNode.getByteFrequencyData(dataArray)
+      return dataArray
+    } else {
+      throw "error"
+    }
   }
 
   private resetSourceDuration(): void {
