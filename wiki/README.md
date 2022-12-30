@@ -19,7 +19,7 @@ yami-voice / [Exports](modules.md)
 
 ## DEMO
 
-- [在线 DEMO](https://yydounai1234.github.io/yami-voice/)
+- [在线 DEMO](https://yydounai1234.github.io/Yami/)
 - 下载源码
 
 ```text
@@ -90,13 +90,22 @@ track.pitch = 0.7
 
 - 开始播放
 
+url / buffer 播放：
+
 ```javascript
 track.play()
 ```
 
+麦克风播放：
+
+```javascript
+track.play()
+document.getElementByID("audio").srcObject = micoPhoneTrack.stream
+```
+
 ## 使用文档
 
-具体的使用文档指南可以查看 [Yami](https://github.com/yydounai1234/Yami/tree/master/wiki/Exports.md)。
+具体的使用文档指南可以查看 [Yami](https://github.com/yydounai1234/Yami/tree/master/wiki/modules.md)。
 
 ## LICENSE
 

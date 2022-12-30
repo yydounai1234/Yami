@@ -16,6 +16,7 @@
 
 ### Properties
 
+- [analyserNode](Track.md#analysernode)
 - [audioContext](Track.md#audiocontext)
 - [bufferSize](Track.md#buffersize)
 - [gainNode](Track.md#gainnode)
@@ -25,17 +26,22 @@
 - [source](Track.md#source)
 - [sourceDuration](Track.md#sourceduration)
 - [sourceNode](Track.md#sourcenode)
+- [streamDestinationNode](Track.md#streamdestinationnode)
 - [type](Track.md#type)
 
 ### Accessors
 
 - [currentTime](Track.md#currenttime)
 - [duration](Track.md#duration)
+- [fftSize](Track.md#fftsize)
 - [pitch](Track.md#pitch)
+- [stream](Track.md#stream)
 - [volume](Track.md#volume)
 
 ### Methods
 
+- [getFrequencyDomainData](Track.md#getfrequencydomaindata)
+- [getTimeDomainData](Track.md#gettimedomaindata)
 - [init](Track.md#init)
 - [pause](Track.md#pause)
 - [play](Track.md#play)
@@ -61,9 +67,19 @@
 
 #### Defined in
 
-[track.ts:60](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/track.ts#L60)
+[track.ts:62](https://github.com/yydounai1234/Yami/blob/3b9828c/lib/track.ts#L62)
 
 ## Properties
+
+### analyserNode
+
+• `Private` **analyserNode**: `undefined` \| `AnalyserNode`
+
+#### Defined in
+
+[track.ts:60](https://github.com/yydounai1234/Yami/blob/3b9828c/lib/track.ts#L60)
+
+___
 
 ### audioContext
 
@@ -71,7 +87,7 @@
 
 #### Defined in
 
-[track.ts:62](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/track.ts#L62)
+[track.ts:64](https://github.com/yydounai1234/Yami/blob/3b9828c/lib/track.ts#L64)
 
 ___
 
@@ -81,7 +97,7 @@ ___
 
 #### Defined in
 
-[track.ts:51](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/track.ts#L51)
+[track.ts:51](https://github.com/yydounai1234/Yami/blob/3b9828c/lib/track.ts#L51)
 
 ___
 
@@ -91,7 +107,7 @@ ___
 
 #### Defined in
 
-[track.ts:59](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/track.ts#L59)
+[track.ts:59](https://github.com/yydounai1234/Yami/blob/3b9828c/lib/track.ts#L59)
 
 ___
 
@@ -101,7 +117,7 @@ ___
 
 #### Defined in
 
-[track.ts:58](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/track.ts#L58)
+[track.ts:58](https://github.com/yydounai1234/Yami/blob/3b9828c/lib/track.ts#L58)
 
 ___
 
@@ -111,7 +127,7 @@ ___
 
 #### Defined in
 
-[track.ts:56](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/track.ts#L56)
+[track.ts:56](https://github.com/yydounai1234/Yami/blob/3b9828c/lib/track.ts#L56)
 
 ___
 
@@ -121,7 +137,7 @@ ___
 
 #### Defined in
 
-[track.ts:57](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/track.ts#L57)
+[track.ts:57](https://github.com/yydounai1234/Yami/blob/3b9828c/lib/track.ts#L57)
 
 ___
 
@@ -131,7 +147,7 @@ ___
 
 #### Defined in
 
-[track.ts:61](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/track.ts#L61)
+[track.ts:63](https://github.com/yydounai1234/Yami/blob/3b9828c/lib/track.ts#L63)
 
 ___
 
@@ -150,7 +166,7 @@ ___
 
 #### Defined in
 
-[track.ts:45](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/track.ts#L45)
+[track.ts:45](https://github.com/yydounai1234/Yami/blob/3b9828c/lib/track.ts#L45)
 
 ___
 
@@ -160,7 +176,17 @@ ___
 
 #### Defined in
 
-[track.ts:52](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/track.ts#L52)
+[track.ts:52](https://github.com/yydounai1234/Yami/blob/3b9828c/lib/track.ts#L52)
+
+___
+
+### streamDestinationNode
+
+• `Private` **streamDestinationNode**: `undefined` \| `MediaStreamAudioDestinationNode`
+
+#### Defined in
+
+[track.ts:61](https://github.com/yydounai1234/Yami/blob/3b9828c/lib/track.ts#L61)
 
 ___
 
@@ -170,7 +196,7 @@ ___
 
 #### Defined in
 
-[track.ts:63](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/track.ts#L63)
+[track.ts:65](https://github.com/yydounai1234/Yami/blob/3b9828c/lib/track.ts#L65)
 
 ## Accessors
 
@@ -186,7 +212,7 @@ ___
 
 #### Defined in
 
-[track.ts:125](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/track.ts#L125)
+[track.ts:150](https://github.com/yydounai1234/Yami/blob/3b9828c/lib/track.ts#L150)
 
 ___
 
@@ -202,7 +228,39 @@ ___
 
 #### Defined in
 
-[track.ts:114](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/track.ts#L114)
+[track.ts:132](https://github.com/yydounai1234/Yami/blob/3b9828c/lib/track.ts#L132)
+
+___
+
+### fftSize
+
+• `get` **fftSize**(): `number`
+
+#### Returns
+
+`number`
+
+#### Defined in
+
+[track.ts:114](https://github.com/yydounai1234/Yami/blob/3b9828c/lib/track.ts#L114)
+
+• `set` **fftSize**(`newVal`): `void`
+
+获取傅立叶变化窗口大小
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `newVal` | `number` |
+
+#### Returns
+
+`void`
+
+#### Defined in
+
+[track.ts:110](https://github.com/yydounai1234/Yami/blob/3b9828c/lib/track.ts#L110)
 
 ___
 
@@ -218,7 +276,7 @@ ___
 
 #### Defined in
 
-[track.ts:92](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/track.ts#L92)
+[track.ts:101](https://github.com/yydounai1234/Yami/blob/3b9828c/lib/track.ts#L101)
 
 • `set` **pitch**(`newVal`): `void`
 
@@ -234,7 +292,23 @@ ___
 
 #### Defined in
 
-[track.ts:96](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/track.ts#L96)
+[track.ts:105](https://github.com/yydounai1234/Yami/blob/3b9828c/lib/track.ts#L105)
+
+___
+
+### stream
+
+• `get` **stream**(): `undefined` \| `MediaStream`
+
+获取流
+
+#### Returns
+
+`undefined` \| `MediaStream`
+
+#### Defined in
+
+[track.ts:143](https://github.com/yydounai1234/Yami/blob/3b9828c/lib/track.ts#L143)
 
 ___
 
@@ -250,7 +324,7 @@ ___
 
 #### Defined in
 
-[track.ts:103](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/track.ts#L103)
+[track.ts:121](https://github.com/yydounai1234/Yami/blob/3b9828c/lib/track.ts#L121)
 
 • `set` **volume**(`newVal`): `void`
 
@@ -266,9 +340,41 @@ ___
 
 #### Defined in
 
-[track.ts:107](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/track.ts#L107)
+[track.ts:125](https://github.com/yydounai1234/Yami/blob/3b9828c/lib/track.ts#L125)
 
 ## Methods
+
+### getFrequencyDomainData
+
+▸ **getFrequencyDomainData**(): `Uint8Array`
+
+绘制频域图片
+
+#### Returns
+
+`Uint8Array`
+
+#### Defined in
+
+[track.ts:301](https://github.com/yydounai1234/Yami/blob/3b9828c/lib/track.ts#L301)
+
+___
+
+### getTimeDomainData
+
+▸ **getTimeDomainData**(): `Uint8Array`
+
+绘制时域图片
+
+#### Returns
+
+`Uint8Array`
+
+#### Defined in
+
+[track.ts:287](https://github.com/yydounai1234/Yami/blob/3b9828c/lib/track.ts#L287)
+
+___
 
 ### init
 
@@ -280,7 +386,7 @@ ___
 
 #### Defined in
 
-[track.ts:68](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/track.ts#L68)
+[track.ts:70](https://github.com/yydounai1234/Yami/blob/3b9828c/lib/track.ts#L70)
 
 ___
 
@@ -296,7 +402,7 @@ ___
 
 #### Defined in
 
-[track.ts:196](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/track.ts#L196)
+[track.ts:221](https://github.com/yydounai1234/Yami/blob/3b9828c/lib/track.ts#L221)
 
 ___
 
@@ -318,7 +424,7 @@ ___
 
 #### Defined in
 
-[track.ts:141](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/track.ts#L141)
+[track.ts:166](https://github.com/yydounai1234/Yami/blob/3b9828c/lib/track.ts#L166)
 
 ___
 
@@ -340,7 +446,7 @@ ___
 
 #### Defined in
 
-[track.ts:220](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/track.ts#L220)
+[track.ts:245](https://github.com/yydounai1234/Yami/blob/3b9828c/lib/track.ts#L245)
 
 ___
 
@@ -356,7 +462,7 @@ ___
 
 #### Defined in
 
-[track.ts:241](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/track.ts#L241)
+[track.ts:266](https://github.com/yydounai1234/Yami/blob/3b9828c/lib/track.ts#L266)
 
 ___
 
@@ -364,13 +470,15 @@ ___
 
 ▸ `Private` **resetSourceDuration**(): `void`
 
+重置
+
 #### Returns
 
 `void`
 
 #### Defined in
 
-[track.ts:257](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/track.ts#L257)
+[track.ts:315](https://github.com/yydounai1234/Yami/blob/3b9828c/lib/track.ts#L315)
 
 ___
 
@@ -386,7 +494,7 @@ ___
 
 #### Defined in
 
-[track.ts:184](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/track.ts#L184)
+[track.ts:209](https://github.com/yydounai1234/Yami/blob/3b9828c/lib/track.ts#L209)
 
 ___
 
@@ -408,4 +516,4 @@ seek
 
 #### Defined in
 
-[track.ts:209](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/track.ts#L209)
+[track.ts:234](https://github.com/yydounai1234/Yami/blob/3b9828c/lib/track.ts#L234)
