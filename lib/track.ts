@@ -58,6 +58,7 @@ export default class Track {
   private processBuffer = new SampleBuffer()
   private gainNode: GainNode | undefined
   private analyserNode: AnalyserNode | undefined
+  private streamDestinationNode: MediaStreamAudioDestinationNode | undefined
   constructor(
     private source: AudioBuffer | MediaStream,
     private audioContext: AudioContext,
@@ -86,7 +87,12 @@ export default class Track {
     this.analyserNode.connect(this.scriptNode)
     this.gainNode = this.audioContext.createGain()
     this.scriptNode.connect(this.gainNode)
-    this.gainNode.connect(this.audioContext.destination)
+    this.streamDestinationNode = this.audioContext.createMediaStreamDestination()
+    if (this.type === TrackType.MICROPHONE) {
+      this.gainNode.connect(this.streamDestinationNode)
+    } else {
+      this.gainNode.connect(this.audioContext.destination)
+    }
   }
 
   /**
@@ -129,6 +135,13 @@ export default class Track {
     } else {
       return -1
     }
+  }
+
+  /**
+   * 获取流
+   */
+  get stream() {
+    return this.streamDestinationNode && this.streamDestinationNode.stream
   }
 
   /**
@@ -256,6 +269,7 @@ export default class Track {
       this.analyserNode && this.analyserNode.disconnect()
       this.sourceNode.disconnect()
       this.scriptNode && this.scriptNode.disconnect()
+      this.streamDestinationNode && this.streamDestinationNode.disconnect()
       if (!isAudioBufferSourceNode(this.sourceNode)) {
         this.sourceNode.mediaStream.getTracks().forEach((track) => {
           track.stop()
@@ -295,6 +309,9 @@ export default class Track {
     }
   }
 
+  /**
+   * 重置
+   */
   private resetSourceDuration(): void {
     this.processBuffer = new SampleBuffer()
     this.sourceDuration = {
