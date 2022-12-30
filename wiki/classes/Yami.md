@@ -48,7 +48,7 @@ Yaml 类
 
 #### Defined in
 
-[yami.ts:30](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/yami.ts#L30)
+[yami.ts:30](https://github.com/yydounai1234/Yami/blob/3b9828c/lib/yami.ts#L30)
 
 ___
 
@@ -76,7 +76,7 @@ ___
 
 #### Defined in
 
-[yami.ts:48](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/yami.ts#L48)
+[yami.ts:48](https://github.com/yydounai1234/Yami/blob/3b9828c/lib/yami.ts#L48)
 
 ___
 
@@ -100,4 +100,4 @@ ___
 
 #### Defined in
 
-[yami.ts:14](https://github.com/yydounai1234/Baga/blob/c9c4aa1/lib/yami.ts#L14)
+[yami.ts:14](https://github.com/yydounai1234/Yami/blob/3b9828c/lib/yami.ts#L14)

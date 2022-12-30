@@ -88,8 +88,17 @@ track.pitch = 0.7
 
 - 开始播放
 
+url / buffer 播放：
+
 ```javascript
 track.play()
+```
+
+麦克风播放：
+
+```javascript
+track.play()
+document.getElementByID("audio").srcObject = micoPhoneTrack.stream
 ```
 
 ## 使用文档

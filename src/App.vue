@@ -60,11 +60,9 @@
           <v-col sm="6">
             <v-card title="麦克风播放">
               <v-card-item style="min-height: 300px">
-                <p class="mb-5 text-body-2">
-                  建议使用耳机使用该功能，否则可能会导致啸叫
-                </p>
+                <audio style="margin-bottom: 30px" controls ref="microPhoneAudioRef" autoplay></audio>
                 <v-slider
-                  v-model="micoPhoneVolume"
+                  v-model="microPhoneVolume"
                   step="0.1"
                   color="green"
                   label="音量"
@@ -72,7 +70,7 @@
                   prepend-icon="mdi-volume-high"
                 ></v-slider>
                 <v-slider
-                  v-model="micoPhonePitch"
+                  v-model="microPhonePitch"
                   step="0.1"
                   color="green"
                   label="声调"
@@ -129,14 +127,14 @@ let urlTrack: Track | null = null
 let micoPhoneTrack: Track | null = null
 let yami: Yami | null = null
 let timer: ReturnType<typeof setInterval>
-
+const microPhoneAudioRef = ref<HTMLAudioElement>()
 const audioUrl = ref('./440278627.mp3')
 const urlVolume = ref(1)
 const urlProgress = ref(0)
 const urlPitch = ref(1.25)
 const urlDuration = ref(0)
-const micoPhoneVolume = ref(1)
-const micoPhonePitch = ref(1.6)
+const microPhoneVolume = ref(1)
+const microPhonePitch = ref(1.6)
 const urlTimeRef = ref<HTMLCanvasElement>()
 const urlFrequencyRef = ref<HTMLCanvasElement>()
 
@@ -151,12 +149,12 @@ watch(urlVolume, (newVal) => {
 })
 
 /** 监听 micoPhone 音调 */
-watch(micoPhonePitch, (newVal) => {
+watch(microPhonePitch, (newVal) => {
   micoPhoneTrack && (micoPhoneTrack.pitch = newVal)
 })
 
 /** 监听 micoPhone 音量 */
-watch(micoPhoneVolume, (newVal) => {
+watch(microPhoneVolume, (newVal) => {
   micoPhoneTrack && (micoPhoneTrack.volume = newVal)
 })
 
@@ -182,9 +180,12 @@ const stopURLSource = async () => {
 const playMicoPhoneSource = async () => {
   let _yami = yami ?? new Yami()
   micoPhoneTrack = await _yami.createMicrophoneTrack()
-  micoPhoneTrack.pitch = micoPhonePitch.value
-  micoPhoneTrack.volume = micoPhoneVolume.value
+  micoPhoneTrack.pitch = microPhonePitch.value
+  micoPhoneTrack.volume = microPhoneVolume.value
   micoPhoneTrack.play()
+  if (microPhoneAudioRef.value && micoPhoneTrack.stream) {
+    microPhoneAudioRef.value.srcObject = micoPhoneTrack.stream
+  }
 }
 
 const resumeURLSource = () => {
