@@ -57,6 +57,7 @@ export default class Track {
   private soundTouch = new SoundTouch()
   private processBuffer = new SampleBuffer()
   private gainNode: GainNode | undefined
+  private analyserNode: AnalyserNode | undefined
   constructor(
     private source: AudioBuffer | MediaStream,
     private audioContext: AudioContext,
@@ -80,7 +81,9 @@ export default class Track {
       2,
       2
     )
-    this.sourceNode.connect(this.scriptNode)
+    this.analyserNode = this.audioContext.createAnalyser()
+    this.sourceNode.connect(this.analyserNode)
+    this.analyserNode.connect(this.scriptNode)
     this.gainNode = this.audioContext.createGain()
     this.scriptNode.connect(this.gainNode)
     this.gainNode.connect(this.audioContext.destination)
@@ -95,6 +98,15 @@ export default class Track {
 
   set pitch(newVal: number) {
     this.soundTouch.pitch = newVal
+  }
+
+  /** 获取傅立叶变化窗口大小 */
+  set fftSize(newVal: number) {
+    this.analyserNode && (this.analyserNode.fftSize = newVal)
+  }
+
+  get fftSize() {
+    return this.analyserNode ? this.analyserNode.fftSize : -1
   }
 
   /**
@@ -139,7 +151,7 @@ export default class Track {
    * 播放
    */
   async play(offset = 0) {
-    let playFlag = false
+    let playFlag = this.type === TrackType.MICROPHONE
     if (this.scriptNode) {
       this.scriptNode.onaudioprocess = async (audioProcessingEvent) => {
         const outputBuffer = audioProcessingEvent.outputBuffer
@@ -241,6 +253,7 @@ export default class Track {
   release() {
     if (this.sourceNode) {
       this.gainNode && this.gainNode.disconnect()
+      this.analyserNode && this.analyserNode.disconnect()
       this.sourceNode.disconnect()
       this.scriptNode && this.scriptNode.disconnect()
       if (!isAudioBufferSourceNode(this.sourceNode)) {
@@ -251,6 +264,34 @@ export default class Track {
         this.resetSourceDuration()
         this.sourceNode.onended = null
       }
+    }
+  }
+
+  /**
+   * 绘制时域图片
+   */
+  getTimeDomainData(): Uint8Array {
+    if (this.analyserNode) {
+      const bufferLength = this.analyserNode.fftSize
+      const dataArray = new Uint8Array(bufferLength)
+      this.analyserNode.getByteTimeDomainData(dataArray)
+      return dataArray
+    } else {
+      throw "error"
+    }
+  }
+
+  /**
+   * 绘制频域图片
+   */
+  getFrequencyDomainData(): Uint8Array {
+    if (this.analyserNode) {
+      const bufferLength = this.analyserNode.frequencyBinCount
+      const dataArray = new Uint8Array(bufferLength)
+      this.analyserNode.getByteFrequencyData(dataArray)
+      return dataArray
+    } else {
+      throw "error"
     }
   }
 
